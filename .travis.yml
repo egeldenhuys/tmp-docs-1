@@ -3,9 +3,9 @@ language: ruby
 services:
 - docker
 before_install:
-- ls
+- sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended latex-xcolor pgf
 install:
-- ls
+- docker pull egeldenhuys/umlet-docker
 script:
 - bash ./docs/scripts/build.sh $TRAVIS_BUILD_DIR/docs out
 env:
