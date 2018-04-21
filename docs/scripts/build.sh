@@ -93,7 +93,7 @@ then
   git clone https://github.com/egeldenhuys/tmp-docs-bin
   cd tmp-docs-bin
   git remote add upstream https://${GH_TOKEN}@github.com/egeldenuys/tmp-docs-bin.git > /dev/null 2>&1
-  git checkout -b $TRAVIS_BRANCH
+  git checkout $TRAVIS_BRANCH || git checkout -b $TRAVIS_BRANCH
   cp $sourceDir/$outputDir/* .
   git add -A
   git commit -m "$TRAVIS_COMMIT_MESSAGE"
