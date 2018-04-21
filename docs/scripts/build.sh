@@ -39,7 +39,7 @@ echo "Executing as user:group ($userId:$groupId)"
 mkdir -p $sourceDir/$outputDir
 mkdir -p $sourceDir/$imageOutputDir
 
-echo "hi56" > $sourceDir/$outputDir/mahFile
+echo "yeah boii" > $sourceDir/$outputDir/mahFile
 
 # echo "Building .uxf files from $sourceDir to $sourceDir/$outputDir"
 # for i in $sourceDir/*.uxf; do
