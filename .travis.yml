@@ -1,0 +1,27 @@
+if: tag IS blank
+
+sudo: required
+language: ruby
+services:
+- docker
+before_install:
+- sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended latex-xcolor pgf
+install:
+- docker pull egeldenhuys/umlet-docker
+script:
+- bash ./docs/scripts/build.sh $TRAVIS_BUILD_DIR/docs out
+- source ./docs/scripts/env.sh
+deploy:
+  provider: releases
+  overwrite: true
+  all_branches: true
+  on:
+    tags: true
+  api_key:
+    secure: P35K9nl3a7dOXgnGSQZ0UgmxAnVqlCjxoIq8l6bcUguBuii4on10xnF/phrcvoo/X9z+WnSR2CK0OhH/VNES+jdJyMpwR6tqnfaJulb+0GUqj9lyw+/nxCF76wnLAPIs6X5oWtE/j2pSk0UXjYT9T/7LSsEQk5rxMYsh9NU+JaUdeGyvHojslFJSnTI1Q9knuPLHDMM1uJI0EAOKXELzg8AE0uAOQuR3QgGA0sE6E9DsIg6Z3QiOKU6SV2BuqiC7BJ1IxouL15ulMX3X98gYH9wfMssjwRl5DfMvOFz52Bb8Me3PdORsXJ/zzjxue521GBkINsRb6NmFXBPuoo2PqyW5KBciZV5T+LoxeTGwVBF1LnvNGBzwlIsP2GZ8GUiAR8Tv2+F7t1lm6g3V3N/iMY0ebJi+YJRuJxsSaXaMbfxxOO0WP6iwg9a6DPbQZ8hXzRsf7OLtLyU9Jypb0jF0IZ+nx1OZLv0BlqKpZ6L1HP+e3y5l2e7rmyuAy+YN+Y/nYZ0WEjQ6332oVSNtZGCuBt9amurEOZeQNr78YBQS0faESH7o5KhdXa4r1/lN2rDaVAE9zTwSBhA6DTweQAPavUdbWeBc7lt/U9+kvifzNWGdpmOLZ5n6DNdrQLXeayt+j2k2CVQrMS9eFXfavJigwi0ZmpAXkBeAJuuDPcSdaj8=
+  file_glob: true
+  file: docs/out/*
+  skip_cleanup: true
+env:
+  global:
+    - secure: vWx4vOWz4Re3WT5VpRnRf48BAv9Mpfl3EktMoxQio7DKpOPL0lt0kxXw75yo6iWNKloG9g4yCPJwRQSfCBcRlNiYXtsKfD9b2aU/6rccLUT4OSrAjCwcV2jr7e6FphzjNZDMmBhOWrQH/IbuQD+kZA0AM82ldW53mS2PGWwz4008HIbVJDHdIJUdlWf4SHYHuk4t8uWieuQhadaPeq42N7sxl07rDtZKTbJBED0DoFIAM91pt8zGbjEClHL/Ykh2oJrwqcefApAy5R1kH4LLZAOGFiUnnlSYHkSPP5wvjfniGYWcRAvvwAY6wAen+j+tqCXao072oJjszl1zHj1ARp0f1B2Dg8HuPm14QPH5BcVwaAYl+XaUK+joaHo8MfkUawMhtnwYI45YFxwRPdz4hqYGZWQJsr+rShoY1CIfGbxAhjp5y+TSq8YVeEPCK06ONWp6joB1xDmTnCvQ6caU7MzCenTy7wdI/JIT4TTw4PTZ36OlCOpWv8zmkMfhRIBVnBt+YulYftkfab3x4eGofYeP98YQO15aZcQQ/9UJz7KO0BQZuDEswHgzd+1mxkzgxIRHYDkZzs24UTonbfdwPVnyT79B9OWgkHfvs1pgyEeVEtHnU0GTXidwnla44AXdU0LMqTfvSasfXYDNk5DUkIBUdRsDhdbfEr10xvz8xNU=

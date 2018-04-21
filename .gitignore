@@ -1,0 +1,6 @@
+docs/images/uml/*
+docs/out/*
+*.pdf
+*.toc
+*.aux
+*.log
