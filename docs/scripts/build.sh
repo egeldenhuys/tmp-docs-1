@@ -88,16 +88,21 @@ echo "hi56" > $sourceDir/$outputDir/mahFile
 if ! [ -z ${CI+x} ]
 then
   echo "Uploading artifacts to TripleParity/docs-bin"
-  git config --global user.name "Travis CI"
-  git config --global user.email "builds@travis-ci.com"
+
+  git config --global user.name "$(git log -1 --pretty=format:'%an')"
+  git config --global user.email "$(git log -1 --pretty=format:'%ae')"
+  hash=$(git rev-parse HEAD)
+
   git clone https://github.com/egeldenhuys/tmp-docs-bin
   cd tmp-docs-bin
   git remote add upstream https://${GH_TOKEN}@github.com/egeldenhuys/tmp-docs-bin.git > /dev/null 2>&1
   git checkout $TRAVIS_BRANCH || git checkout -b $TRAVIS_BRANCH
   cp $sourceDir/$outputDir/* .
   git add -A
-  git commit -m "$TRAVIS_COMMIT_MESSAGE"
+  set +e
+  git commit -m "$TRAVIS_COMMIT_MESSAGE (TripleParity/$hash)"
   git push upstream $TRAVIS_BRANCH
+  set -e
   cd ..
   rm -fr tmp-docs-bin
 fi
