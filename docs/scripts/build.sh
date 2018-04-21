@@ -92,7 +92,7 @@ then
   git config --global user.email "builds@travis-ci.com"
   git clone https://github.com/egeldenhuys/tmp-docs-bin
   cd tmp-docs-bin
-  git remote add upstream https://${GH_TOKEN}@github.com/egeldenuys/tmp-docs-bin.git > /dev/null 2>&1
+  git remote add upstream https://${GH_TOKEN}@github.com/egeldenhuys/tmp-docs-bin.git > /dev/null 2>&1
   git checkout $TRAVIS_BRANCH || git checkout -b $TRAVIS_BRANCH
   cp $sourceDir/$outputDir/* .
   git add -A
